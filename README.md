@@ -129,6 +129,6 @@ Open Terminal 3
 
 Open Terminal 4
 
-    cd multi-UAV-simulator/
+    cd multi-UAV-simulator/Simulation_Gazebo/
     python run_3D_simulation.py
 
