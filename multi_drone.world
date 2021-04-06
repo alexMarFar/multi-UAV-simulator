@@ -1,0 +1,305 @@
+<?xml version="1.0"?> 
+<!--
+Adapted by:
+Alejandra Martínez, Charalampos Efstratiou and Tom Antoine
+GNC subteam, group 1, GDP AVDC 2020-2021
+email:
+alejandra.martinez-farina@cranfield.ac.uk
+charalampos.efstratiou@cranfield.ac.uk
+tom.antoine@cranfield.ac.uk
+
+Based on a code by:
+author: Eric Johnson
+github: https://github.com/Intelligent-Quads
+
+Please feel free to use and modify this, but keep the above information. Thanks!
+-->
+<sdf version="1.5">
+  <world name="default">
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>100</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.9</erp>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>-1</real_time_update_rate>
+    </physics>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>5000 5000</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="runway">
+          <pose>000 0 0.005 0 0 0</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>5000 5000</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Runway</name>
+            </script>
+          </material>
+        </visual>
+
+        <!--visual name="grass">
+          <pose>0 0 -0.1 0 0 0</pose>
+          <cast_shadows>false</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>5000 5000</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grass</name>
+            </script>
+          </material>
+        </visual!-->
+
+      </link>
+    </model>
+    <model name="fire_station">
+      <include>
+        <uri>model://fire_station</uri>
+      </include>
+      <pose> 0 50 0 0 0 3.2</pose>
+    </model>
+    
+    <model name="fire_truck">
+      <include>
+        <uri>model://fire_truck</uri>
+      </include>
+      <pose> -20 50 0 0 0 0</pose>
+    </model>
+    
+    <model name="tree_1">
+      <include>
+        <uri>model://oak_tree</uri>
+      </include>
+      <pose> -10 40 0 0 0 0</pose>
+    </model>
+    
+    <model name="tree_2">
+      <include>
+        <uri>model://oak_tree</uri>
+      </include>
+      <pose> 10 40 0 0 0 0</pose>
+    </model>
+
+    <!--include>
+      <uri>model://sun</uri>
+    </include!-->
+    <include>
+      <light type="directional" name="my_light">
+            <pose>100 100 30 100 0 0</pose>
+            <diffuse>.9 .9 .9 1</diffuse>
+            <specular>.1 .1 .1 1</specular>
+            <attenuation>
+                <range>20</range>
+            </attenuation>
+            <direction>0 0 -1</direction>
+            <cast_shadows>false</cast_shadows>
+        </light>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+      <cast_shadows>false</cast_shadows>
+        
+    </include>
+
+    <light name='my_light1' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>10 10 100 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='my_light2' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>10 50 100 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='my_light3' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 10 100 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='my_light4' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>10 50 100 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='my_light5' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>10 80 100 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name="drone1">
+      <pose> 0 0 0 0 0 0</pose>
+      <include>
+        <uri>model://drone1</uri>
+      </include>
+    </model>
+    <model name="drone2">
+      <pose> 10 -20 0 0 0 0</pose>
+      <include>
+        <uri>model://drone2</uri>
+      </include>
+    </model>
+    <model name="drone3">
+      <pose>  -12 -25 0 0 0</pose>
+      <include>
+        <uri>model://drone3</uri>
+      </include>
+    </model>
+    <model name="drone4">
+      <pose> 14 -30 0 0 0 4.71</pose>
+      <include>
+        <uri>model://drone4</uri>
+      </include>
+    </model>
+     <model name="drone5">
+      <pose> -16 -35 0 0 0 0</pose>
+      <include>
+        <uri>model://drone5</uri>
+      </include>
+    </model>
+    <model name="drone6">
+      <pose> 18 -40 0 0 0 0</pose>
+      <include>
+        <uri>model://drone6</uri>
+      </include>
+    </model>
+    <model name="drone7">
+      <pose> -20 -45 0 0 0 0</pose>
+      <include>
+        <uri>model://drone7</uri>
+      </include>
+    </model>
+    <!--model name="drone8">
+      <pose> 8 2 0 0 0 0</pose>
+      <include>
+        <uri>model://drone8</uri>
+      </include>
+    </model>
+    <model name="drone9">
+      <pose> 12 0 0 0 0 0</pose>
+      <include>
+        <uri>model://drone9</uri>
+      </include>
+    </model>
+    <model name="drone10">
+      <pose> 12 2 0 0 0 0</pose>
+      <include>
+        <uri>model://drone10</uri>
+      </include>
+    </model>
+    <model name="drone11">
+      <pose> 14 0 0 0 0 0</pose>
+      <include>
+        <uri>model://drone11</uri>
+      </include>
+    </model>
+    <model name="drone12">
+      <pose> 14 2 0 0 0 0</pose>
+      <include>
+        <uri>model://drone12</uri>
+      </include>
+    </model> -->
+
+  </world>
+</sdf>
